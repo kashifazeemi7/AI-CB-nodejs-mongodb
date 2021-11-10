@@ -2,6 +2,8 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from "cors";
 import mongoose from 'mongoose';
+const app = express()
+const port = process.env.PORT || 3000
 
 mongoose.connect('mongodb+srv://dbUser:dbPass@cluster0.7bnpj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
 const User = mongoose.model('User', {
@@ -10,8 +12,6 @@ const User = mongoose.model('User', {
   address: String
 });
 
-const app = express()
-const port = process.env.PORT || 3000
 
 app.use(cors())
 app.use(express.json())
