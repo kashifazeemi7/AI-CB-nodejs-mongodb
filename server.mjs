@@ -5,12 +5,14 @@ import mongoose from 'mongoose';
 const app = express()
 const port = process.env.PORT || 3000
 
-mongoose.connect('mongodb+srv://dbUser:dbPass@cluster0.7bnpj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
+const db = 'mongodb+srv://dbUser:dbPass@cluster0.7bnpj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+
+mongoose.connect(db)
 const User = mongoose.model('User', {
-  name: String,
+  name : String,
   email: String,
   address: String
-});
+})
 
 
 app.use(cors())
