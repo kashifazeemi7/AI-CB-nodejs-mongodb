@@ -3,7 +3,7 @@ import morgan from 'morgan';
 import cors from "cors";
 import mongoose from 'mongoose';
 
-mongoose.connect('mongodb+srv://dbuser:dbpassword@cluster0.nr4e4.mongodb.net/chatbotdb?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://dbUser:dbPass@cluster0.7bnpj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
 const User = mongoose.model('User', {
   name: String,
   email: String,
@@ -28,7 +28,7 @@ app.get('/users', (req, res) => {
     if (!err) {
       res.send(users)
     } else {
-      res.status(500).send("error happened")
+      res.status(500).send("error occured")
     }
   })
 
@@ -40,7 +40,7 @@ app.get('/user/:id', (req, res) => {
     if (!err) {
       res.send(user)
     } else {
-      res.status(500).send("error happened")
+      res.status(500).send("error occured")
     }
   })
 
@@ -48,7 +48,7 @@ app.get('/user/:id', (req, res) => {
 app.post('/user', (req, res) => {
 
   if (!req.body.name || !req.body.email || !req.body.address) {
-    res.status(400).send("invalid data");
+    res.status(400).send("data not valid");
   } else {
     const newUser = new User({
       name: req.body.name,
@@ -57,7 +57,7 @@ app.post('/user', (req, res) => {
     });
     newUser.save().then(() => {
       console.log('user created success')
-      res.send("users created");
+      res.send("user created");
     });
   }
 })
@@ -79,7 +79,7 @@ app.put('/user/:id', (req, res) => {
       if (!err) {
         res.send(data)
       } else {
-        res.status(500).send("error happened")
+        res.status(500).send("error occured")
       }
     })
 })
@@ -89,7 +89,7 @@ app.delete('/user/:id', (req, res) => {
     if (!err) {
       res.send("user deleted")
     } else {
-      res.status(500).send("error happened")
+      res.status(500).send("error occured")
     }
   })
 })
