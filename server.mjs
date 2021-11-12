@@ -2,18 +2,16 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from "cors";
 import mongoose from 'mongoose';
-const app = express()
-const port = process.env.PORT || 3000
 
-const db = 'mongodb+srv://dbUser:dbPass@cluster0.7bnpj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
-
-mongoose.connect(db)
+mongoose.connect('mongodb+srv://dbUser:dbPass@cluster0.7bnpj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
 const User = mongoose.model('User', {
-  name : String,
+  name: String,
   email: String,
   address: String
-})
+});
 
+const app = express()
+const port = process.env.PORT || 3000
 
 app.use(cors())
 app.use(express.json())
@@ -50,7 +48,7 @@ app.get('/user/:id', (req, res) => {
 app.post('/user', (req, res) => {
 
   if (!req.body.name || !req.body.email || !req.body.address) {
-    res.status(400).send("data not valid");
+    res.status(400).send("invalid data");
   } else {
     const newUser = new User({
       name: req.body.name,
@@ -99,14 +97,8 @@ app.delete('/user/:id', (req, res) => {
 app.get('/home', (req, res) => {
   res.send('here is your home')
 })
-
-app.get('/profile', (req, res) => {
-  res.send('here is your profile')
-})
-
-
 app.get('/', (req, res) => {
-  res.send('Hi I am a hello world Server program')
+  res.send('Hola! I am a server at heroku!')
 })
 
 app.listen(port, () => {
